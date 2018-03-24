@@ -1,0 +1,37 @@
+web:
+  build: ./.docker/.
+  ports:
+    - "80:80"
+  links:
+    - db
+    - phpmyadmin
+  volumes:
+    - .:/var/www/html
+    - "./.docker/php.ini:/usr/local/etc/php/php.ini"
+  
+
+db:
+        image: mysql
+        ports: 
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: database
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+            MYSQL_ROOT_PASSWORD: root 
+        volumes:
+            - ./.docker/dump:/docker-entrypoint-initdb.d
+            - persistent:/var/lib/mysql
+      
+    
+phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links: 
+            - db:db
+        ports:
+            - 8000:80
+        environment:
+            MYSQL_USER: ehallpass
+            MYSQL_PASSWORD: ehallpass
+            MYSQL_ROOT_PASSWORD: ehallpass 
+        
