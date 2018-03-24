@@ -19,7 +19,7 @@ $ docker-compose up -d
 
 ```
 DB_CONNECTION=mysql
-DB_HOST=db(mysql - works fine with docker mysql containers)
+DB_HOST=db(mysql - use db)
 DB_PORT=3306
 DB_DATABASE=laravel
 DB_USERNAME=root
